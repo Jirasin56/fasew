@@ -1,0 +1,353 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>กฟ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prompt:wght@500;600;700&family=Sarabun:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky top bar, left-aligned hero with initials badge, then three content bands (about, works with a live calculator, contact). */
+:root {
+  --bg: #f3f6fb;
+  --surface: #ffffff;
+  --band: #e8eef8;
+  --fg: #142038;
+  --muted: #55627d;
+  --line: #d3dcec;
+  --accent: #2b57e0;
+  --accent-fg: #ffffff;
+  --mark: #ffc531;
+  --danger: #d9304a;
+  --ok: #17874f;
+  --font-display: "Prompt", "Noto Sans Thai", Tahoma, sans-serif;
+  --font-body: "Sarabun", "Noto Sans Thai", Tahoma, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1526; --surface: #16203a; --band: #121b31; --fg: #e8edf8; --muted: #9aa8c6;
+    --line: #27345a; --accent: #86a4ff; --accent-fg: #0b1226; --mark: #ffc531; --danger: #ff7087; --ok: #4fd18b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1526; --surface: #16203a; --band: #121b31; --fg: #e8edf8; --muted: #9aa8c6;
+  --line: #27345a; --accent: #86a4ff; --accent-fg: #0b1226; --mark: #ffc531; --danger: #ff7087; --ok: #4fd18b;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.7;
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 30; background: var(--surface);
+}
+.wrap {
+  width: 100%; max-width: 1040px; margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.3; margin: 0; text-wrap: balance; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* top bar */
+.bar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: var(--surface); border-bottom: 1px solid var(--line);
+}
+.bar .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .25rem 1.5rem; padding-block: .6rem; }
+.brand { font-family: var(--font-display); font-weight: 700; color: var(--fg); text-decoration: none; font-size: 1.05rem; }
+.menu { display: flex; flex-wrap: wrap; gap: .25rem; }
+.menu a { color: var(--muted); text-decoration: none; padding: .3rem .75rem; border-radius: 999px; font-weight: 500; font-size: .95rem; }
+.menu a:hover { color: var(--fg); background: var(--band); }
+
+/* hero */
+.hero { padding-block: 3.5rem 4rem; }
+.hero .wrap { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2.5rem; align-items: center; }
+.badge {
+  width: 170px; height: 170px; border-radius: 50%;
+  background: var(--accent); color: var(--accent-fg);
+  display: grid; place-items: center;
+  font-family: var(--font-display); font-weight: 700; font-size: 3.2rem;
+  box-shadow: 0 0 0 6px var(--bg), 0 0 0 9px var(--mark);
+}
+.eyebrow { color: var(--muted); font-weight: 600; font-size: .9rem; letter-spacing: .04em; margin: 0 0 .5rem; }
+.hero h1 { font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 700; margin-bottom: .75rem; }
+.hero p.lead { color: var(--muted); max-width: 58ch; margin: 0 0 1.5rem; }
+.btn {
+  display: inline-block; background: var(--accent); color: var(--accent-fg);
+  font-family: var(--font-display); font-weight: 600; font-size: .95rem;
+  padding: .6rem 1.3rem; border-radius: 10px; text-decoration: none; border: 2px solid var(--accent);
+}
+.btn:hover { filter: brightness(1.08); }
+.btn.ghost { background: transparent; color: var(--accent); }
+.btn-row { display: flex; flex-wrap: wrap; gap: .75rem; }
+
+/* sections */
+section { padding-block: 3.5rem; }
+section.band { background: var(--band); }
+.sec-head { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.75rem; }
+.sec-head h2 { font-size: 1.7rem; font-weight: 700; }
+.sec-head::after { content: ""; flex: 1; height: 2px; background: var(--line); min-width: 1rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+.grid > * { min-width: 0; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 1.25rem 1.4rem; }
+.panel h3 { font-size: 1.1rem; margin-bottom: .5rem; color: var(--accent); }
+.panel ul { margin: 0; padding-left: 1.2rem; }
+.panel p { margin: 0 0 .75rem; }
+.about-text { max-width: 68ch; margin: 0 0 1.75rem; }
+
+/* works */
+.work { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px); gap: 2rem; align-items: start; }
+.work-info h3 { font-size: 1.35rem; margin-bottom: .5rem; }
+.tags { display: flex; flex-wrap: wrap; gap: .4rem; margin: .75rem 0 1.25rem; padding: 0; list-style: none; }
+.tags li { background: var(--band); border: 1px solid var(--line); border-radius: 6px; padding: .1rem .6rem; font-size: .85rem; font-weight: 600; }
+.more { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-top: 2rem; }
+.more .panel { border-style: dashed; color: var(--muted); }
+.more .panel h3 { color: var(--fg); }
+
+/* calculator */
+.calc { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 1rem; }
+.calc output {
+  display: block; width: 100%; min-height: 3.6rem; text-align: right; overflow-x: auto; white-space: nowrap;
+  font-family: var(--font-display); font-weight: 600; font-size: 1.9rem;
+  background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: .5rem .8rem; margin-bottom: .75rem;
+}
+.calc output.err { color: var(--danger); }
+.keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; }
+.keys button {
+  font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; cursor: pointer;
+  padding: .7rem 0; border-radius: 10px; border: 1px solid var(--line);
+  background: var(--band); color: var(--fg);
+}
+.keys button:hover { border-color: var(--accent); }
+.keys button:active { transform: translateY(1px); }
+.keys .op { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+.keys .clr { color: var(--danger); }
+.keys .eq { background: var(--mark); color: #1a1400; border-color: var(--mark); grid-column: span 2; }
+
+/* contact */
+.contact-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.contact-list li { display: flex; flex-wrap: wrap; gap: .25rem 1rem; }
+.contact-list .k { min-width: 6rem; color: var(--muted); font-weight: 600; }
+.contact-list .v { overflow-wrap: anywhere; user-select: all; }
+
+footer { border-top: 1px solid var(--line); padding-block: 1.5rem; color: var(--muted); font-size: .9rem; background: var(--surface); }
+
+@media (max-width: 720px) {
+  .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  .badge { width: 120px; height: 120px; font-size: 2.3rem; }
+  .work { grid-template-columns: minmax(0, 1fr); }
+  .sec-head h2 { font-size: 1.45rem; }
+}
+</style>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#home">My e-Portfolio</a>
+    <nav class="menu" aria-label="เมนูหลัก">
+      <a href="#home">หน้าแรก</a>
+      <a href="#about">เกี่ยวกับฉัน</a>
+      <a href="#works">ผลงาน</a>
+      <a href="#contact">ติดต่อ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="home" class="hero">
+    <div class="wrap">
+      <div class="badge" aria-hidden="true">ชื่อ</div>
+      <div>
+        <p class="eyebrow">นักเรียนชั้น [ระดับชั้น] · โรงเรียน [ชื่อโรงเรียน]</p>
+        <h1>สวัสดี ฉันชื่อ [ชื่อ-นามสกุล]</h1>
+        <p class="lead">[แนะนำตัวสั้น ๆ 1–2 ประโยค เช่น ฉันสนใจการเขียนโปรแกรมและกำลังฝึกสร้างเว็บไซต์ด้วย HTML, CSS และ JavaScript]</p>
+        <div class="btn-row">
+          <a class="btn" href="#works">ดูผลงานของฉัน</a>
+          <a class="btn ghost" href="#contact">ติดต่อ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="band">
+    <div class="wrap">
+      <div class="sec-head"><h2>เกี่ยวกับฉัน</h2></div>
+      <p class="about-text">[เล่าเกี่ยวกับตัวเอง ความสนใจ เป้าหมายในการเรียน และสิ่งที่ภูมิใจ]</p>
+      <div class="grid">
+        <div class="panel">
+          <h3>การศึกษา</h3>
+          <ul>
+            <li>[ระดับชั้น / โรงเรียน]</li>
+            <li>[วิชาหรือโครงการที่สนใจ]</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>ทักษะ</h3>
+          <ul>
+            <li>HTML / CSS / JavaScript เบื้องต้น</li>
+            <li>การใช้ GitHub และ GitHub Pages</li>
+            <li>[ทักษะอื่น ๆ ของคุณ]</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>งานอดิเรก</h3>
+          <ul>
+            <li>[งานอดิเรกที่ 1]</li>
+            <li>[งานอดิเรกที่ 2]</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="works">
+    <div class="wrap">
+      <div class="sec-head"><h2>ผลงาน</h2></div>
+
+      <div class="work">
+        <div class="work-info">
+          <h3>เครื่องคิดเลขออนไลน์</h3>
+          <p>ผลงานโค้ดที่เขียนด้วย HTML, CSS และ JavaScript คำนวณบวก ลบ คูณ หาร วงเล็บ และเปอร์เซ็นต์ได้ ใช้งานได้ทั้งการกดปุ่มและพิมพ์ตัวเลขจากคีย์บอร์ด ลองกดเครื่องคิดเลขทางด้านขวาได้เลย</p>
+          <ul class="tags">
+            <li>HTML</li><li>CSS</li><li>JavaScript</li>
+          </ul>
+          <a class="btn ghost" href="https://github.com/ชื่อผู้ใช้GitHub/ชื่อRepository/blob/main/calculator.html" target="_blank" rel="noopener">ดูโค้ดบน GitHub</a>
+        </div>
+
+        <div class="calc" role="group" aria-label="เครื่องคิดเลข">
+          <output id="display" aria-live="polite">0</output>
+          <div class="keys">
+            <button type="button" class="clr" data-act="clear">C</button>
+            <button type="button" data-act="back" aria-label="ลบทีละตัว">⌫</button>
+            <button type="button" class="op" data-key="%">%</button>
+            <button type="button" class="op" data-key="/">÷</button>
+
+            <button type="button" data-key="7">7</button>
+            <button type="button" data-key="8">8</button>
+            <button type="button" data-key="9">9</button>
+            <button type="button" class="op" data-key="*">×</button>
+
+            <button type="button" data-key="4">4</button>
+            <button type="button" data-key="5">5</button>
+            <button type="button" data-key="6">6</button>
+            <button type="button" class="op" data-key="-">−</button>
+
+            <button type="button" data-key="1">1</button>
+            <button type="button" data-key="2">2</button>
+            <button type="button" data-key="3">3</button>
+            <button type="button" class="op" data-key="+">+</button>
+
+            <button type="button" data-key="0">0</button>
+            <button type="button" data-key=".">.</button>
+            <button type="button" class="eq" data-act="equals">=</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="more">
+        <div class="panel">
+          <h3>[ชื่อผลงานที่ 2]</h3>
+          <p>[อธิบายผลงานสั้น ๆ และเทคโนโลยีที่ใช้]</p>
+        </div>
+        <div class="panel">
+          <h3>[ชื่อผลงานที่ 3]</h3>
+          <p>[อธิบายผลงานสั้น ๆ และเทคโนโลยีที่ใช้]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="band">
+    <div class="wrap">
+      <div class="sec-head"><h2>ติดต่อ</h2></div>
+      <ul class="contact-list">
+        <li><span class="k">อีเมล</span><span class="v">example@email.com</span></li>
+        <li><span class="k">GitHub</span><span class="v"><a href="https://github.com/ชื่อผู้ใช้GitHub" target="_blank" rel="noopener">github.com/ชื่อผู้ใช้GitHub</a></span></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 [ชื่อ-นามสกุล] · e-Portfolio</div>
+</footer>
+
+<script>
+(function () {
+  var out = document.getElementById('display');
+  var expr = '';
+
+  function pretty(s) { return s.replace(/\*/g, '×').replace(/\//g, '÷').replace(/-/g, '−'); }
+  function show() { out.classList.remove('err'); out.textContent = expr === '' ? '0' : pretty(expr); }
+
+  // ตัวคำนวณแบบเขียนเอง (ไม่ใช้ eval) รองรับ + - * / % และวงเล็บ
+  function evaluate(s) {
+    var i = 0;
+    function peek() { return s.charAt(i); }
+    function expression() {
+      var v = term();
+      while (peek() === '+' || peek() === '-') { var o = s.charAt(i++); var r = term(); v = o === '+' ? v + r : v - r; }
+      return v;
+    }
+    function term() {
+      var v = unary();
+      while (peek() === '*' || peek() === '/') { var o = s.charAt(i++); var r = unary(); v = o === '*' ? v * r : v / r; }
+      return v;
+    }
+    function unary() { if (peek() === '-') { i++; return -unary(); } return postfix(); }
+    function postfix() { var v = primary(); while (peek() === '%') { i++; v = v / 100; } return v; }
+    function primary() {
+      if (peek() === '(') { i++; var v = expression(); if (peek() !== ')') throw new Error('paren'); i++; return v; }
+      var m = /^(\d+\.?\d*|\.\d+)/.exec(s.slice(i));
+      if (!m) throw new Error('num');
+      i += m[0].length; return parseFloat(m[0]);
+    }
+    var result = expression();
+    if (i !== s.length) throw new Error('extra');
+    return result;
+  }
+
+  function equals() {
+    if (expr === '') return;
+    try {
+      var r = evaluate(expr);
+      if (!isFinite(r)) throw new Error('inf');
+      expr = String(parseFloat(r.toPrecision(12)));
+      show();
+    } catch (e) {
+      expr = '';
+      out.textContent = 'คำนวณไม่ได้';
+      out.classList.add('err');
+    }
+  }
+
+  function add(k) { expr += k; show(); }
+
+  document.querySelector('.keys').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.key) add(b.dataset.key);
+    else if (b.dataset.act === 'clear') { expr = ''; show(); }
+    else if (b.dataset.act === 'back') { expr = expr.slice(0, -1); show(); }
+    else if (b.dataset.act === 'equals') equals();
+  });
+
+  // คีย์บอร์ด: ทำงานเมื่อไม่ได้พิมพ์ในช่องอื่น
+  document.addEventListener('keydown', function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var t = e.target; if (t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+    if (/^[0-9+\-*/.%()]$/.test(e.key)) { add(e.key); }
+    else if (e.key === 'Enter' && !(t && t.tagName === 'A')) { e.preventDefault(); equals(); }
+    else if (e.key === 'Backspace') { expr = expr.slice(0, -1); show(); }
+    else if (e.key === 'Escape') { expr = ''; show(); }
+  });
+
+  show();
+})();
+</script>
+
+</body></html>
